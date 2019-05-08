@@ -10,13 +10,18 @@ To start nREPL via `lein repl`:
 lein nrepl
 ```
 
-To start the REPL via rebel-readline:
+To start the REPL with rebel-readline:
 
 ```
 lein rebl
 ```
 
-and then in the REPL run:
+This would start an nREPL server automatically. Then call `(fig)` to start figwheel-main with rebel-readline.
 
-- `(start-nrepl!)` to start the nREPL server
-- `(fig)` to start figwheel-main with rebel-readline
+To start the REPL using `clj`:
+
+```
+clj -A:rebl
+```
+
+Same as above, this would start an nREPL server automatically. Then call `(fig)` to start figwheel-main with rebel-readline.
