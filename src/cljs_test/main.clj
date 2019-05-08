@@ -1,8 +1,10 @@
 (ns cljs-test.main
   (:require [nrepl.server :as nrepl-server]
             [rebel-readline.clojure.main :as rebel-clj-main]
-            [rebel-readline.core :as rebel-core]))
+            [rebel-readline.core :as rebel-core]
+            [clojure.java.io :as io]))
 
+(def nrepl-port 7888)
 (defonce nrepl-server (atom nil))
 
 (defn nrepl-handler []
@@ -15,14 +17,18 @@
 
 (defn start-nrepl! []
   (reset! nrepl-server
-          (nrepl-server/start-server :port 7888
+          (nrepl-server/start-server :port nrepl-port
                                      :handler (nrepl-handler)
-                                     :middleware (middleware))))
+                                     :middleware (middleware)))
+  (println "nREPL server started on port" nrepl-port)
+  (spit ".nrepl-port" nrepl-port))
 
 (defn stop-nrepl! []
   (when (not (nil? @nrepl-server))
     (nrepl-server/stop-server @nrepl-server)
-    (reset! nrepl-server nil)))
+    (reset! nrepl-server nil)
+    (println "nREPL server on port" nrepl-port "stopped")
+    (io/delete-file ".nrepl-port" true)))
 
 (defn fig-start [build]
   (require 'figwheel.main.api)
@@ -41,4 +47,5 @@
    (rebel-clj-main/repl*
     {:init (fn []
              (require '[cljs-test.main :refer :all])
-             (use 'clojure.repl))})))
+             (use 'clojure.repl)
+             (start-nrepl!))})))
