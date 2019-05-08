@@ -1,6 +1,5 @@
 (ns user
-  (:require [nrepl.server :as nrepl-server]
-            [clojure.java.io :as io]))
+  (:require [nrepl.server :as nrepl-server]))
 
 (use 'clojure.repl)
 
