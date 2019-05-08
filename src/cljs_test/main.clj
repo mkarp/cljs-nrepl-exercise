@@ -3,8 +3,6 @@
             [rebel-readline.clojure.main :as rebel-clj-main]
             [rebel-readline.core :as rebel-core]))
 
-(use 'clojure.repl)
-
 (defonce nrepl-server (atom nil))
 
 (defn nrepl-handler []
@@ -42,4 +40,5 @@
   (rebel-core/ensure-terminal
    (rebel-clj-main/repl*
     {:init (fn []
-             (require '[cljs-test.main :refer :all]))})))
+             (require '[cljs-test.main :refer :all])
+             (use 'clojure.repl))})))
