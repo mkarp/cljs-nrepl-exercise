@@ -8,8 +8,7 @@
   [[cider/cider-nrepl "0.21.1"]]
 
   :source-paths
-  ["dev"
-   "src"
+  ["src"
    "target"]
 
   :profiles
@@ -28,4 +27,4 @@
 
   :aliases
   {"nrepl" ["with-profile" "dev" "repl"]
-   "rebl" ["with-profile" "dev" "trampoline" "run" "-m" "rebel-readline.main"]})
+   "rebl" ["with-profile" "dev" "trampoline" "run" "-m" "cljs-test.main"]})

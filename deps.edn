@@ -1,0 +1,22 @@
+{:deps
+ {org.clojure/clojure {:mvn/version "1.10.0"}
+  org.clojure/clojurescript {:mvn/version "1.10.520"}}
+
+ :paths
+ ["src"
+  "resources"
+  "target"]
+
+ :aliases
+ {:rebl
+  {:extra-deps
+   {nrepl/nrepl {:mvn/version "0.6.0"}
+    com.bhauman/figwheel-main {:mvn/version "0.2.0"}
+    com.bhauman/rebel-readline {:mvn/version "0.1.4"}
+    com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
+    cider/cider-nrepl {:mvn/version "0.21.1"}
+    cider/piggieback {:mvn/version "0.4.0"}
+    clojure-complete {:mvn/version "0.2.5"}
+    proto-repl {:mvn/version "0.3.1"}}
+
+   :main-opts ["-m" "cljs-test.main"]}}}
