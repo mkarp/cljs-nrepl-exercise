@@ -2,7 +2,7 @@
 
 This is a test repo to verify that I'm still sane while setting up ClojureScript REPL via nREPL.
 
-![ClojureScript nREPL Exercise Demo](https://img.youtube.com/vi/r_ps849l-xk/0.jpg)](https://www.youtube.com/watch?v=r_ps849l-xk)
+[![ClojureScript nREPL Exercise Demo](https://img.youtube.com/vi/r_ps849l-xk/0.jpg)](https://www.youtube.com/watch?v=r_ps849l-xk)
 
 ### Usage:
 
