@@ -26,5 +26,5 @@
     {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}}
 
   :aliases
-  {"nrepl" ["with-profile" "dev" "repl"]
-   "rebl" ["with-profile" "dev" "trampoline" "run" "-m" "cljs-test.main"]})
+  {"nrepl" ["with-profile" "dev" "trampoline" "run" "-m" "cljs-test.main"]
+   "repl-dev" ["with-profile" "dev" "repl"]})

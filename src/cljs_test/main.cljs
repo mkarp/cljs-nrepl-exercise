@@ -10,3 +10,6 @@
   (hello-world "Foo")
   (hello-world "Bar")
   (log "Foo"))
+
+(defn reload []
+  (js/console.log "Reload"))
