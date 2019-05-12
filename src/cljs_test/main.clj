@@ -16,25 +16,26 @@
          (conj
           (mapv resolve @(ns-resolve 'cider.nrepl 'cider-middleware))
           (ns-resolve 'cider.piggieback 'wrap-cljs-repl)
-          (ns-resolve 'cljs-test.nrepl-middleware 'wrap-app-reload))))
+          ((ns-resolve 'cljs-test.nrepl-middleware 'wrap-app-reload)
+           {:ns "cljs-test.app" :fn "reload"}))))
 
 (defn start-nrepl! []
   (reset! nrepl-server
           (nrepl-server/start-server :port nrepl-port
                                      :handler (nrepl-handler)))
-  (log "nREPL server started on port " nrepl-port)
+  (log "nREPL server started on port" nrepl-port)
   (spit ".nrepl-port" nrepl-port))
 
 (defn stop-nrepl! []
   (when (not (nil? @nrepl-server))
     (nrepl-server/stop-server @nrepl-server)
     (reset! nrepl-server nil)
-    (log "nREPL server on port " nrepl-port " stopped")
+    (log "nREPL server on port" nrepl-port "stopped")
     (io/delete-file ".nrepl-port" true)))
 
 (defn start-fig
   ([]
-   (start-fig "build"))
+   (start-fig "app"))
   ([build]
    (require 'figwheel.main.api)
    ((ns-resolve 'figwheel.main.api 'start) build)))
@@ -45,11 +46,11 @@
 
 (defn reset-fig []
   (stop-fig)
-  (start-fig "build"))
+  (start-fig "app"))
 
 (defn cljs-repl
   ([]
-   (cljs-repl "build"))
+   (cljs-repl "app"))
   ([build]
    (require 'figwheel.main.api)
    ((ns-resolve 'figwheel.main.api 'cljs-repl) build)))

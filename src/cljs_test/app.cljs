@@ -1,4 +1,4 @@
-(ns cljs-test.main)
+(ns cljs-test.app)
 
 (defn hello-world [msg]
   (str "Hello world " msg))
