@@ -1,38 +1,22 @@
 (ns cljs-test.main
   (:require [clojure.java.io :as io]
-            [clojure.string :as s]
-            [nrepl.misc :refer [uuid]]
             [nrepl.server :as nrepl-server]
             [rebel-readline.clojure.main :as rebel-clj-main]
-            [rebel-readline.core :as rebel-core]))
+            [rebel-readline.core :as rebel-core]
+            [cljs-test.logging :refer [log]]))
 
 (def nrepl-port 7888)
 (defonce nrepl-server (atom nil))
 
-(defn log [& msgs]
-  (println (apply str (cons "[cljs-test] " msgs))))
-
-(defn wrap-app-reload [handler]
-  (fn [msg]
-    (handler msg)
-    (when (and (= (:op msg) "eval")
-               (s/ends-with? (str (:file msg)) "cljs"))
-      (log "Eval and reload " (:ns msg))
-      (handler {:transport (:transport msg)
-                :session (:session msg)
-                :ns "cljs-test.main"
-                :op "eval"
-                :id (uuid)
-                :code "(cljs-test.main/reload)"}))))
-
 (defn nrepl-handler []
   (require 'cider.nrepl
-           'cider.piggieback)
+           'cider.piggieback
+           'cljs-test.nrepl-middleware)
   (apply nrepl.server/default-handler
          (conj
           (mapv resolve @(ns-resolve 'cider.nrepl 'cider-middleware))
           (ns-resolve 'cider.piggieback 'wrap-cljs-repl)
-          (ns-resolve 'cljs-test.main 'wrap-app-reload))))
+          (ns-resolve 'cljs-test.nrepl-middleware 'wrap-app-reload))))
 
 (defn start-nrepl! []
   (reset! nrepl-server
