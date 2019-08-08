@@ -12,7 +12,7 @@
   (require 'cider.nrepl
            'cider.piggieback
            'cljs-test.nrepl-middleware)
-  (apply nrepl.server/default-handler
+  (apply nrepl-server/default-handler
          (conj
           (mapv resolve @(ns-resolve 'cider.nrepl 'cider-middleware))
           (ns-resolve 'cider.piggieback 'wrap-cljs-repl)
