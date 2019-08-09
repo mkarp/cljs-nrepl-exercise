@@ -1,0 +1,7 @@
+{
+    "calva.customCljsRepl": {
+        "name": "nREPL hot reload",
+        "startCode": "(cljs-repl)",
+        "connectedRegExp": "To quit, type: :cljs/quit"
+    }
+}
